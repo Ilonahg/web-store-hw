@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Блог</h1>
+  {% for blog in blogs %}
+    <h2><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h2>
+    <p>{{ blog.content|truncatechars:100 }}</p>
+  {% endfor %}
+  <a href="{% url 'blog_create' %}">Создать новую запись</a>
+{% endblock %}
