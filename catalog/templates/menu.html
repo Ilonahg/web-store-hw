@@ -1,6 +1,20 @@
 <nav>
-  <ul>
-    <li><a href="{% url 'index' %}">Главная</a></li>
-    <li><a href="/contacts.html">Контакты</a></li>
-  </ul>
+    <ul>
+        <!-- Ссылаемся на главную страницу — меняем 'index' на 'home' -->
+        <li><a href="{% url 'home' %}">Главная</a></li>
+        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+
+    </ul>
 </nav>
+
+{% if user.is_authenticated %}
+    <p>
+        Привет, {{ user.username }} |
+        <a href="{% url 'logout' %}">Выйти</a>
+    </p>
+{% else %}
+    <p>
+        <a href="{% url 'login' %}">Вход</a> |
+        <a href="{% url 'register' %}">Регистрация</a>
+    </p>
+{% endif %}

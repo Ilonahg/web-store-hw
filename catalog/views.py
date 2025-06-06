@@ -1,48 +1,32 @@
-from django.views.generic import ListView, DetailView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Product
-
+from django.urls import reverse_lazy
 
 class ProductListView(ListView):
     model = Product
-    template_name = "index.html"
-    context_object_name = "products"
+    template_name = 'catalog/product_list.html'
+    context_object_name = 'products'
 
-
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
-    template_name = "product_detail.html"
-    context_object_name = "product"
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
 
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    model = Product
+    fields = ['name', 'description', 'price', 'image']
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('product_list')
 
-class ContactsView(TemplateView):
-    template_name = "contacts.html"
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    model = Product
+    fields = ['name', 'description', 'price', 'image']
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('product_list')
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product
-from .forms import ProductForm
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    model = Product
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('product_list')
 
-def product_list(request):
-    products = Product.objects.all()
-    return render(request, 'catalog/product_list.html', {'products': products})
-
-def product_create(request):
-    form = ProductForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
-        return redirect('product_list')
-    return render(request, 'catalog/product_form.html', {'form': form})
-
-def product_update(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    form = ProductForm(request.POST or None, request.FILES or None, instance=product)
-    if form.is_valid():
-        form.save()
-        return redirect('product_list')
-    return render(request, 'catalog/product_form.html', {'form': form})
-
-def product_delete(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    if request.method == "POST":
-        product.delete()
-        return redirect('product_list')
-    return render(request, 'catalog/product_confirm_delete.html', {'product': product})
