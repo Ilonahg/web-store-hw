@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Магазин{% endblock %}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    {% include 'menu.html' %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>© 2025 Мой Магазин</footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Магазин{% endblock %}</title>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'product_list' %}">Товары</a> |
+    <a href="{% url 'login' %}">Вход</a> |
+    <a href="{% url 'register' %}">Регистрация</a>
+  </nav>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>
