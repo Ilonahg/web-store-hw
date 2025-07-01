@@ -1,0 +1,12 @@
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Статус: {{ product.get_status_display }}</p>
+
+<!-- Кнопки по правам -->
+{% if request.user == product.owner %}
+  <a href="{% url 'products:edit' product.pk %}">Редактировать</a>
+  <a href="{% url 'products:delete' product.pk %}">Удалить</a>
+{% elif request.user.groups.filter(name='Модератор продуктов').exists %}
+  <a href="{% url 'products:delete' product.pk %}">Удалить</a>
+  <a href="{% url 'products:unpublish' product.pk %}">Отменить публикацию</a>
+{% endif %}

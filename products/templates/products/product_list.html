@@ -1,0 +1,14 @@
+<h1>Список продуктов</h1>
+
+<ul>
+  {% for product in products %}
+    <li>
+      <a href="{% url 'products:detail' product.pk %}">{{ product.name }}</a>
+      — {{ product.get_status_display }}
+    </li>
+  {% empty %}
+    <li>Пока нет продуктов.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'products:create' %}">➕ Создать продукт</a>
