@@ -18,21 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-]
-from django.urls import path, include
-
-urlpatterns = [
-    path('products/', include('products.urls')),
-]
+# config/urls.py
 
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda request: redirect('products/', permanent=False)),  # редирект на /products/
     path('admin/', admin.site.urls),
-    path('products/', include('products.urls')),
+    path('', include('products.urls')),
 ]
+

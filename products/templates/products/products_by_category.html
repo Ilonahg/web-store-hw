@@ -1,0 +1,9 @@
+<h1>Продукти в категорії</h1>
+
+<ul>
+  {% for product in products %}
+    <li>{{ product.name }}</li>
+  {% empty %}
+    <li>Немає продуктів</li>
+  {% endfor %}
+</ul>
