@@ -19,8 +19,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # наше приложение
-    "catalog",
+    # наши приложения
+    "catalog.apps.CatalogConfig",  # или просто "catalog", если без AppConfig
+    "blog.apps.BlogConfig",        # или "blog"
 ]
 
 MIDDLEWARE = [
