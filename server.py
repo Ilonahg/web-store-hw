@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+
 class MyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
@@ -16,11 +17,13 @@ class MyHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"404 Not Found")
 
+
 def run():
     server_address = ("", 8000)  # Сервер на порту 8000
     httpd = HTTPServer(server_address, MyHandler)
     print("Сервер запущен на http://localhost:8000 ...")
     httpd.serve_forever()
+
 
 if __name__ == "__main__":
     run()

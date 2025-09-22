@@ -1,0 +1,5 @@
+[
+  { "model": "catalog.category", "pk": 1, "fields": { "name": "Ноутбуки", "slug": "noutbuki" } },
+  { "model": "catalog.category", "pk": 2, "fields": { "name": "Смартфоны", "slug": "smartfony" } },
+  { "model": "catalog.category", "pk": 3, "fields": { "name": "Наушники", "slug": "naushniki" } }
+]
